@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "./proto";
+
+message AddRequest{
+  uint64 a = 1;
+  uint64 b = 2;
+}
+
+message AddResponse {
+  uint64 result =1 ;
+}
+
+service AddService {
+  rpc Compute (AddRequest) returns (AddResponse) {}
+}
