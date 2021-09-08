@@ -24,9 +24,25 @@ docker build . -t williamnoble/add-service:v1.0
 docker run -p :3001:3000 williamnoble/add-service:v1.0
 
 # Client
-docker push williamnoble/add-service:v1.0
 docker build . -t williamnoble/api-service:v1.0
+docker push williamnoble/add-service:v1.0
+
+# Without Kubernetes
+$ go run main.go  # for each client & server
+
+# With Kubernetes with Kubectl
+$ kubectl create -f add-service.yaml
+$ kubectl create -f api-service.yaml
+
+$ kubectl get services
+# add-service, api-service TYPE CLUSTER_IP EXT_IP PORT AGE
+
+# Test it!
+$ curl localhost:8080/add/21/23
+
+# Clean up our services
+$ kubectl delete service add-service
+$ kubectl delete service api-service
+
 ```
 
-
-Run server/client from their respective directories (vs the root dirs)
